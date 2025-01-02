@@ -17,7 +17,7 @@ $db_password = "test123";
 $dsn = "$db_type:host=$db_server;dbname=$db_name;port=$db_port;charset=$db_charset";
 
 // Ustawienia przesyłania plików
-define('UPLOADED_FILES_DIR', dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'uploaded' . DIRECTORY_SEPARATOR); // Przesyłanie obrazów
+define('UPLOADED_FILES_DIR', dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'sent' . DIRECTORY_SEPARATOR); // Przesyłanie obrazów
 define('ALLOWED_MIME_TYPES', ['image/jpeg', 'image/png', 'image/gif']); // Dozwolone typy plików
 define('ALLOWED_EXTENSIONS', ['jpeg', 'jpg', 'png', 'gif']); // Dozwolone rozszerzenia
 define('MAX_FILE_SIZE', 5242880); // Maksymalny rozmiar pliku

@@ -1,37 +1,40 @@
 <?php
-declare(strict_types=1);
-include "../src/bootstrap.php";
+require "../src/bootstrap.php";
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+$user = $cms->users()->getById($id);
+$publications = $cms->publications()->getAll(true, null, $id);
 
-if ($id) {
-    $user = $cms->user()->getById($id);
-} else {
-    abort(404);
-}
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <title>User account</title>
-</head>
-<body class="flex w-full h-screen justify-center items-center">
-<div class="bg-gray-300 w-1/2 px-8 py-10">
-    <div class="prose">
-        <h3>Profile information</h3>
-        <p>Full name: <b class="tracking-wide"><?= htmlspecialchars("{$user['first_name']} {$user['last_name']}") ?></b>
-        </p>
-        <p>Email adres: <b class="tracking-wide"><?= htmlspecialchars($user['email']) ?></b></p>
-        <p>Date join: <b
-                    class="tracking-wide"><?= htmlspecialchars(date("Y-m-d", strtotime($user['created_at']))) ?></b></p>
-    </div>
-</div>
+<?php include APP_ROOT . "/public/includes/header.php"; ?>
+    <main class="container" id="content">
+        <section class="header">
+            <h1><?= $user['first_name'] . " " . $user["last_name"]?></h1>
+            <p class="uczestnik"><b>Uczestniczy od:</b> <?= formate_date($user['created_at']) ?></p>
+            <img src="sent/<?= $user['profile_url'] ?? "uczestnik.png" ?>"
+                 alt="Zdjęcie profilowe użytkownika <?= $user['first_name'] . ' ' . $user['last_name'] ?> "
+                 class="profile"><br>
+        </section>
+        <section class="grid">
 
-</body>
-</html>
+            <?php foreach($publications as $publication): ?>
+                <article class="summary">
+                    <a href="publication.php?id=<?= $publication['id'] ?>">
+                        <img
+                            src="sent/<?= htmlspecialchars($publication['image_file']) ?? 'blank.png' ?>"
+                            alt="<?= htmlspecialchars($publication['image_alt_text']) ?>"
+                        >
+                        <h2><?= htmlspecialchars($publication['title']) ?></h2>
+                        <p><?= htmlspecialchars($publication['summary'])?></p>
+                    </a>
+                    <p class="credit">
+                        Zamieszczono w <a href="category.php?id=<?= $publication['id_category'] ?>"><?= $publication['category'] ?></a>
+                        przez: <a href="user.php?id=<?= $publication['id_user'] ?>"><?= $publication['author'] ?></a>
+                    </p>
+                </article>
+            <?php endforeach; ?>
+
+        </section>
+    </main>
+<?php include APP_ROOT . "/public/includes/footer.php"; ?>
