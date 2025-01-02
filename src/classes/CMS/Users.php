@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS;
+namespace PhpMysql\CMS;
 
 class Users
 {

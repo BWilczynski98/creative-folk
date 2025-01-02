@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 include "../../src/bootstrap.php";
-use Validation\Validator;
+use PhpMysql\Validation\Validator;
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -51,6 +51,7 @@ $identifiers = [
 
 // Onsubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Zmienne pomocnicze do pracy z przesyłanym zdjęciem
     $image_tmp = $_FILES['image']['tmp_name'] ?? null;
     $image_name = $_FILES['image']['name'] ?? null;
     $image_error = $_FILES['image']['error'] ?? null;
@@ -78,10 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     }
 
+    // Początkowa konfiguracja Purifer
+    $purifier = new HTMLPurifier();
+    $purifier->config->set('HTML.Allowed', 'p,br,strong,em,a[href],img[src|alt]');
+
     // Pobieranie danych publikacji
     $publication['title']       =   $_POST['title'];
     $publication['summary']     =   $_POST['summary'];
-    $publication['content']     =   $_POST['content'];
+    $publication['content']     =   $purifier->purify($_POST['content']); // Wyczyszczenie treści z niedozwolonych znaczników
     $publication['id_user']     =   $_POST['id_user'];
     $publication['id_category'] =   $_POST['id_category'];
     $publication['published']   =   (isset($_POST['published']) && ($_POST['published'] == 1) ? 1 : 0);

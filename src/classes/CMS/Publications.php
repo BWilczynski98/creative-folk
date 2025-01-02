@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS;
+namespace PhpMysql\CMS;
 use PDOException;
 use Exception;
 use Imagick;

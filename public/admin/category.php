@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 include "../../src/bootstrap.php";
-use Validation\Validator;
+use PhpMysql\Validation\Validator;
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
