@@ -3,7 +3,7 @@ declare(strict_types=1);
 include "../src/bootstrap.php";
 
 $publications = $cms->publications()->getAll(true, null, null, 6);
-//dd($publications);
+
 $section = '';
 $head_tags['title'] = "Strona główna - Creative Folk";
 $head_tags['description'] = "Opis strony głównej serwisu Creative Folk";
