@@ -1,0 +1,13 @@
+{% for publication in publications %}
+    <article class="summary">
+        <a href="{{ document_root }}publication.php?id={{ publication.id }}">
+            <img
+                    src="{{ document_root }}sent/{{ publication.image_file ?? 'blank.png'}}"
+                    alt="{{ publication.image_alt_text ?? '' }}"
+            />
+            <h2>{{ publication.title }}</h2>
+            <p>{{ publication.summary }}</p>
+        </a>
+        {{ include('publication-category-and-author-credits.html.twig') }}
+    </article>
+{% endfor %}

@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ category.name }} w Creative Folk{% endblock %}
+{% block description %}{{ category.description }}{% endblock %}
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.description }}</p>
+        </section>
+        <section class="grid">
+            {{ include('publication-tile.html.twig') }}
+        </section>
+    </main>
+{% endblock %}

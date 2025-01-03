@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="{% block description %}Kreatywne umysły do wynajęcia{% endblock %}" >
+    <meta name="keywords" content="{% block keywords %}creative,folk{% endblock %}">
+    <link rel="stylesheet" type="text/css" href="{{ document_root }}css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico">
+    <title>{% block title %}Creative Folk{% endblock %}</title>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div>
+            <a class="skip-link" href="#content">Przejdź do treści</a>
+            <div class="logo">
+                <a href="{{ document_root }}index.php"><img src="{{ document_root }}img/logo.png" alt="Creative Folk"></a>
+            </div>
+        </div>
+        <nav>
+            <button id="toggle-navigation" aria-expanded="false">
+                <span class="icon-menu"></span><span class="hidden">Menu</span>
+            </button>
+            <ul id="menu">
+                {% for link in navigation %}
+                    {% if (link.navigation is same as(1)) %}
+                        <li>
+                            <a href="{{ document_root }}category.php?id={{ link.id }}">{{ link.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li>
+                    <a href="{{ document_root }}search.php">
+                        <span class="icon-search"></span><span class="search-text">Szukaj</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+{% block content %}{% endblock %}
+<footer>
+    <div class="container">
+        <a href="{{ document_root }}contact.php">Napisz do nas</a>
+        <span class="copyright">&copy; Creative Folk {{ 'now'|date('Y') }}</span>
+    </div>
+</footer>
+</body>
+</html>

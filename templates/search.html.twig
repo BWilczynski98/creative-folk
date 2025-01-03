@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if term %}
+        Wynik wyszukiwania dla {{ term }}
+    {% else %}
+        Wyszukiwanie
+    {% endif %}
+{% endblock %}
+{% block description %}
+    {% if term %}
+        Wynik wyszukiwania dla {{ term }} w Creative Folk
+    {% else %}
+        Wyszukaj interesujący cię temat
+    {% endif %}
+{% endblock %}
+{% block keywords %}Creative Folk, creative, folk, search, wyszukiwarka{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <form action="search.php" method="GET" class="form-search">
+                <label for="search"><span>Wuszukaj: </span></label>
+                <input
+                        type="text"
+                        name="term"
+                        value="{{ term }}"
+                        id="search"
+                        placeholder="Wpisz szukane słowo"
+                        required
+                />
+                <input
+                        type="submit"
+                        value="Szukaj"
+                        class="btn btn-search"
+                />
+                {% if term == true %}
+                    <p>
+                        <b>Znaleziono</b>
+                        {{ results_count }} wyników
+                    </p>
+                {% endif %}
+            </form>
+        </section>
+        <section class="grid">
+            {% include('publication-tile.html.twig') %}
+        </section>
+        {% if results_count > limit %}
+            <nav class="pagination" role="navigation" aria-label="Navbar pagination">
+                <ul>
+                    {% for i in 1..total_pages %}
+                        <li>
+                            <a
+                                    href="{{ document_root }}search.php?term={{ term }}&limit={{ limit }}&offset={{ (loop.index - 1) * limit }}"
+                                    class="btn {% if loop.index == current_page %} active"
+                                    aria-current="true{% endif %}"
+                            >
+                                {{ loop.index }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
+    </main>
+{% endblock %}

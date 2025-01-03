@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Profil użytkownika {{ user.first_name }} {{ user.last_name }}{% endblock %}
+{% block description %}Profil użytkownika {{ user.first_name }} {{ user.last_name }} w Creative Folk{% endblock %}
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            <p class="uczestnik"><b>Uczestniczy od: </b>{{ user.created_at|date("d M Y") }}</p>
+            {% if user.profile_url %}
+                <img
+                        src="{{ document_root }}sent/{{ user.profile_url }}"
+                        alt="Zdjęcie profilowe {{ user.first_name }} {{ user.last_name }}"
+                />
+            {% else %}
+                <img
+                        src="{{ document_root }}sent/uczestnik.png"
+                        alt="Zdjęcie domyslne"
+                />
+            {% endif %}
+        </section>
+        <section class="grid">
+        {% include('publication-tile.html.twig') %}
+        </section>
+    </main>
+{% endblock %}

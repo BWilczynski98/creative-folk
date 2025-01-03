@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <main class="article container" id="content">
+        <section class="image">
+            <img
+                src="{{ document_root }}sent/{{ publication.image_file ?? 'blank.png' }}"
+                alt="{{ publication.image_alt_text ?? '' }}"
+            />
+        </section>
+        <section class="text">
+            <h1>{{ publication.title }}</h1>
+            <div class="date">{{ publication.created_at|date('d F Y') }}</div>
+            <div class="content">{{ publication.content }}</div>
+            {{ include('publication-category-and-author-credits.html.twig') }}
+        </section>
+    </main>
+{% endblock %}

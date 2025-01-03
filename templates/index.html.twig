@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Strona główna - Creative Folk{% endblock %}
+{% block description %}Kreatywne umysły w jednym miejscu{% endblock %}
+{% block keywords %}creative, folk, main page, strona główna, kreatywne, umysły, blog, fotografia, podróże{% endblock %}
+{% block content %}
+    <main class="container grid" id="content">
+        {{ include('publication-tile.html.twig') }}
+    </main>
+{% endblock %}
