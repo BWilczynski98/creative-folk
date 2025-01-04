@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ document_root }}css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="shortcut icon" type="image/png" href="{{ document_root }}img/favicon.ico">
+    <title>Admin {% block title %}{% endblock %}</title>
+</head>
+<body>
+<header class="header-admin">
+    <div class="container">
+        <a class="skip-link" href="#content">Przejdź do treści</a>
+        <div class="logo">
+            <a href="{{ document_root }}admin/index.php"><img src="{{ document_root }}img/logo.png" alt="Creative Folk"></a>
+        </div>
+        <nav>
+            <button id="toggle-navigation" aria-expanded="false">
+                <span class="icon-menu"></span><span class="hidden">Menu</span>
+            </button>
+            <ul id="menu">
+                <li><a href="{{ document_root }}admin/publications.php">Publikacje</a></li>
+                <li><a href="{{ document_root }}admin/categories.php">Kategorie</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+{% block content %}{% endblock %}
+<footer>
+    <div class="container">
+        <a href="{{ document_root }}contact.php">Napisz do nas</a>
+        <span class="copyright">&copy; Creative Folk {{ 'now'|date('Y') }}</span>
+    </div>
+</footer>
+<script src="https://cdn.tiny.cloud/1/c7ggn69v7dkmitkqo68tu9omgd1w65gx1bj5kv7xqncuurag/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    if (document.getElementById('tresc')){
+        tinymce.init({
+            menubar: false,
+            selector: '#tresc',
+            toolbar: 'bold italic link',
+            plugins: 'link',
+            target_list: false,
+            link_title: false
+        });
+    };
+</script>
+</body>
+</html>
