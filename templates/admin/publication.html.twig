@@ -1,0 +1,110 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}
+    {% if publication.id %}
+        Edytowanie publikacji {{ publication.title }}
+    {% else %}
+        Nowa publikacja
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <form action="publication.php?id={{ publication.id }}" method="POST" enctype="multipart/form-data">
+    <main class="container admin" id="content">
+        <h1>{{ publication.id ? 'Edytuj publikacje' : 'Dodaj publikacje' }}</h1>
+        {% if errors.warning %}
+            <div class="alert alert-danger">{{ errors.warning }}</div>
+        {% endif %}
+        <div class="admin-article">
+            <section class="image">
+            {% if publication.image_file %}
+                <label>Obraz:</label>
+                <img src="../sent/{{ publication.image_file }}" alt="{{ publication.image_alt_text }}">
+                <p class="alt"><strong>Tekst zastępczy (alt): </strong>{{ publication.image_alt_text }}</p>
+                <a href="edit-image-alt.php?id={{ publication.id }}" class="btn btn-secondary">Edytuj tekst zastępczy</a>
+                <a href="delete-image.php?id={{ publication.id }}" class="btn btn-secondary">Usuń obraz</a>
+            {% else %}
+                <label for="image">Prześlij obraz:</label>
+                <div class="form-group image-placeholder">
+                    <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            name="image"
+                            class="form-control-file"
+                            id="image"
+                    ><br>
+                    <span class="errors">{{ errors.image_file }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="image_alt_text">Tekst zastępczy (alt): </label>
+                    <input id="image_alt_text" name="image_alt_text" class="form-control" type="text">
+                    <span class="errors">{{ errors.image_alt_text }}</span>
+                </div>
+            {% endif %}
+            </section>
+
+            <section class="text">
+                <div class="form-group">
+                    <label for="title">Tytuł: </label>
+                    <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            class="form-control"
+                            value="{{ publication.title }}"
+                    >
+                    <span class="errors">{{ errors.title }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="summary">Podsumowanie: </label>
+                    <textarea name="summary" id="summary" class="form-control">{{ publication.summary }}</textarea>
+                    <span class="errors">{{ errors.summary }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="content">Treść: </label>
+                    <textarea name="content" id="content" class="form-control">{{ publication.content }}</textarea>
+                    <span class="errors">{{ errors.content }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="id_user">Autor: </label>
+                    <select name="id_user" id="id_user">
+                        {% for author in authors %}
+                            <option
+                                    value="{{ author.id }}"
+                                    {{ publication.id_user == author.id ? 'selected' : '' }}
+                            >
+                                {{ author.first_name}} {{ author.last_name}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <span class="error">{{ errors.author }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="id_category">Kategoria: </label>
+                    <select name="id_category" id="id_category">
+                        {% for category in categories %}
+                            <option
+                                    value="{{ category.id }}"
+                                    {{ publication.id_category == category.id ? 'selected' : '' }}
+                            >
+                                {{ category.name}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <span class="error">{{ errors.category }}</span>
+                </div>
+                <div class="form-check">
+                    <input
+                            type="checkbox"
+                            id="published"
+                            name="published"
+                            value="1"
+                            class="form-check-input"
+                            {{ publication.published == 1 ? 'checked' : '' }}
+                    >
+                    <label class="form-check-label" for="published">Opublikowano</label>
+                </div>
+                <input type="submit" name="update" value="Zapisz" class="btn btn-primary">
+            </section>
+        </div>
+    </main>
+</form>
+{% endblock %}

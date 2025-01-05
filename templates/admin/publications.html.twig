@@ -1,0 +1,53 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}Spis publikacji{% endblock %}
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>Publikacje</h1>
+            {% if success == true %}
+            <div class="alert alert-success">{{ success }}</div>
+            {% endif %}
+            {% if error == true %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+            <p>
+                <a href="publication.php" class="btn btn-primary">Dodaj nową publikację</a>
+            </p>
+        </section>
+        <table>
+            <tr>
+                <th>Obraz</th>
+                <th>Tytuł</th>
+                <th class="created">Utworzono</th>
+                <th class="pub">Widoczna</th>
+                <th class="edit">Zmień</th>
+                <th class="del">Usuń</th>
+            </tr>
+            {% for publication in publications %}
+            <tr>
+                <td>
+                    <img
+                            src="../sent/{{ publication.image_file ?? 'blank.png' }}"
+                            alt="<?= parse_to_html($publication['image_alt_text']) ?>"
+                    >
+                </td>
+                <td>
+                    <strong>{{ publication.title }}</strong>
+                </td>
+                <td>
+                    {{ publication.created_at|date('d F Y') }}
+                </td>
+                <td>
+                    {{ publication.published ? 'Tak' : 'Nie' }}
+                </td>
+                <td>
+                    <a href="publication.php?id={{ publication.id }}" class="btn btn-primary">Zmień</a>
+                </td>
+                <td>
+                    <a href="delete-publication.php?id={{ publication.id }}" class="btn btn-danger">Usuń</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+{% endblock %}
