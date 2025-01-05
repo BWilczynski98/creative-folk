@@ -1,0 +1,32 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}Spis kategorii{% endblock %}
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>Kategorie</h1>
+            {% if success %}
+            <div class="alert alert-success">{{ success }}</div>
+            {% endif %}
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+            <p>
+                <a href="category.php" class="btn btn-primary">Dodaj nową kategorię</a>
+            </p>
+        </section>
+        <table class="admin">
+            <tr>
+                <th>Nazwa</th>
+                <th class="edit">Zmień</th>
+                <th class="del">Usuń</th>
+            </tr>
+            {% for category in categories %}
+                <tr>
+                    <td><strong>{{ category.name }}</strong></td>
+                    <td><a href="category.php?id={{ category.id }}" class="btn btn-primary">Zmień</a></td>
+                    <td><a href="delete-category.php?id={{ category.id }}" class="btn btn-danger">Usuń</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </main>
+{% endblock %}

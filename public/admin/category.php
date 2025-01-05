@@ -39,8 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($invalid) {
         $errors['warning'] = 'Proszę poprawić błedy';
     } else {
-        //todo: Walidacja przed duplikowaniem nazw kategorii
-        // Problem rozwiązany, aczkolwiek do refaktoryzacji
         if ($id) {
             try {
                 $res = $cms->categories()->update($category);
@@ -59,49 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 
-?>
+$data = [
+        'category'  =>  $category,
+        'errors'    =>  $errors,
 
-<?php include APP_ROOT . "/public/includes/admin-header.php"; ?>
-<main class="container admin" id="content">
-    <form action="category.php?id=<?= $id?>" method="POST" class="narrow">
-        <h1><?= $id ? 'Edytuj kategorie' : 'Dodaj kategorie'?></h1>
 
-        <?php if ($errors['warning']): ?>
-        <div class="alert alert-danger"><?= $errors['warning']?></div>
-        <?php endif; ?>
-        <div class="form-group">
-            <label for="name">Nazwa:</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                value="<?= parse_to_html($category['name']) ?>"
-                class="form-control"
+];
 
-            />
-            <span class="errors"><?= $errors['name']?></span>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Opis:</label>
-            <textarea id="description" name="description" class="form-control" ><?= parse_to_html($category['description']) ?></textarea>
-            <span class="errors"><?= $errors['description']?></span>
-        </div>
-
-        <div class="form-check">
-            <input
-                type="checkbox"
-                id="navigation"
-                name="navigation"
-                value="1"
-                class="form-check-input"
-                <?= $category['navigation'] === 1 ? 'checked' : '' ?>
-            />
-            <label for="navigation" class="form-check-label">Nawigacja</label>
-
-        </div>
-
-        <input type="submit" id="save" value="Zapisz" class="btn btn-primary btn-save" />
-    </form>
-</main>
-<?php include APP_ROOT . "/public/includes/admin-footer.php"; ?>
+echo $twig->render('admin/category.html.twig', $data);
