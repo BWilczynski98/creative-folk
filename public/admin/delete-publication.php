@@ -7,7 +7,7 @@ $publication = [];
 
 // Walidacja id (Puste i nie w typie int)
 if (!$id) {
-    redirect('publications.php', ['error' => 'Nie odnaleziono artykułu 1']);
+    redirect('publications.php', ['error' => 'Nie odnaleziono artykułu']);
 }
 
 // Id nie jest puste i jest w typie int, próba pobrania kategorii
@@ -17,16 +17,16 @@ if ($id) {
 
 // Nie odnaleziono kategorii z podanym id
 if (!$publication) {
-    redirect('publications.php', ['error' => 'Nie odnaleziono artykułu 2']);
+    redirect('publications.php', ['error' => 'Nie odnaleziono artykułu']);
 }
 
 // Wywołanie dla przycisku "Potwierdź"
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($publication) {
         $response = $cms->publications()->delete($publication['id']);
-        redirect('publications.php', ['success' => 'Kategoria została poprawnie usunięta']);
+        redirect('publications.php', ['success' => 'Publikacja została poprawnie usunięta']);
     } else {
-        redirect('publications.php', ['error' => 'Nie odnaleziono artykułu 3']);
+        redirect('publications.php', ['error' => 'Nie odnaleziono artykułu']);
     }
 }
 ?>
