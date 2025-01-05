@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <link rel="shortcut icon" type="image/png" href="{{ document_root }}img/favicon.ico">
-    <title>Admin {% block title %}{% endblock %}</title>
+    <title>Admin - {% block title %}{% endblock %}</title>
 </head>
 <body>
 <header class="header-admin">
@@ -33,7 +33,6 @@
 {% block content %}{% endblock %}
 <footer>
     <div class="container">
-        <a href="{{ document_root }}contact.php">Napisz do nas</a>
         <span class="copyright">&copy; Creative Folk {{ 'now'|date('Y') }}</span>
     </div>
 </footer>
