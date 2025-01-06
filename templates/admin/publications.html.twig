@@ -28,7 +28,7 @@
                 <td>
                     <img
                             src="../sent/{{ publication.image_file ?? 'blank.png' }}"
-                            alt="<?= parse_to_html($publication['image_alt_text']) ?>"
+                            alt="{{ publication.image_alt_text }}"
                     >
                 </td>
                 <td>
