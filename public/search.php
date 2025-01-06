@@ -16,10 +16,6 @@ if ($term) {
     if ($results_count > 0) {
         $publications = $cms->publications()->search($term, $limit, $offset);
     }
-
-    // Zmiana head tagów na odpowiednio opisujące wynik wyszukiwania
-    $head_tags['title'] = "Wyniki wyszukiwania dla hasła " . parse_to_html($term);
-    $head_tags['description'] = $head_tags['title'] . " w Creative Folk";
 }
 
 if ($results_count > $limit) {
