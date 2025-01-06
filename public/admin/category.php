@@ -5,7 +5,6 @@ use PhpMysql\Validation\Validator;
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-
 $category = [
     'id'            => $id,
     'name'          => '',
@@ -23,7 +22,7 @@ if ($id) {
     $category = $cms->categories()->getById($id);
 
     if (!$category) {
-        header("location: categories.php");
+        redirect("categories.php", ['error' => 'Kategoria nie odnaleziona']);
     }
 }
 
@@ -42,17 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($id) {
             try {
                 $res = $cms->categories()->update($category);
-                header('location: categories.php');
-            } catch (\PDOException $e) {
+                redirect('categories.php', ['success' => 'Kategoria zapisana']);
+            } catch (Exception $e) {
                 $errors['warning'] = 'Nazwa kategorii już istnieje';
             }
         } else {
             unset($category['id']);
             $res = $cms->categories()->create($category);
-            header('location: categories.php');
+            redirect('categories.php', ['success' => 'Kategoria zapisana']);
         }
-
-
     }
 
 }
@@ -60,8 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $data = [
         'category'  =>  $category,
         'errors'    =>  $errors,
-
-
 ];
 
 echo $twig->render('admin/category.html.twig', $data);
