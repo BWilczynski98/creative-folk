@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}Usuwanie zdjęcia{% endblock %}
+{% block content %}
+    <main class="container admin" id="content">
+        <form action="delete-image.php?id={{ id }}" method="POST" class="narrow">
+            <h1>Usuń obraz</h1>
+            <p><img
+                        src="../sent/{{ publication.image_file }}"
+                        al="<?= parse_to_html($publication['image_alt_text']) ?>"
+                >
+            </p>
+            <p>Kliknij <em>Potwierdź</em>, aby usunąć obraz</p>
+            <input type="submit" class="btn btn-primary" name="delete" value="Potwierdź">
+            <a href="publication.php?id={{ id }}" class="btn btn-danger">Anuluj</a>
+        </form>
+    </main>
+{% endblock %}

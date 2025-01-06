@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 include "../../src/bootstrap.php";
-
+// TODO: Kiedy usuwa się publikacje to nie usuwa się zdjęcie z bazy danych
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $publication = [];
 
@@ -29,15 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('publications.php', ['error' => 'Nie odnaleziono artykułu']);
     }
 }
-?>
 
-<?php include APP_ROOT . "/public/includes/admin-header.php"; ?>
-<main class="container admin" id="content">
-    <form class="narrow" action="delete-publication.php?id=<?= $publication['id']?>" method="POST">
-        <h1>Usuń publikacje</h1>
-        <p>Kliknij <em>Potwierdź</em>, aby usunąć kategorię: <em><?= parse_to_html($publication['title'] ?? 'Nazwa artykułu') ?></em></p>
-        <input type="submit" class="btn btn-primary" value="Potwierdź" name="delete">
-        <a href="publications.php" class="btn btn-danger">Anuluj</a>
-    </form>
-</main>
-<?php include APP_ROOT . "/public/includes/admin-footer.php"; ?>
+$data = [
+        'publication'   =>  $publication,
+];
+
+echo $twig->render('admin/delete-publication.html.twig', $data);

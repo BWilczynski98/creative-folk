@@ -30,15 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-?>
+$data = [
+        'category'  =>  $category
+];
 
-<?php include APP_ROOT . "/public/includes/admin-header.php"; ?>
-<main class="container admin" id="content">
-    <form class="narrow" action="delete-category.php?id=<?= $category['id']?>" method="POST">
-        <h1>Usuń kategorię</h1>
-        <p>Kliknij <em>Potwierdź</em>, aby usunąć kategorię: <em><?= parse_to_html($category['name'] ?? 'Nazwa kategorii') ?></em></p>
-        <input class="btn btn-primary" type="submit" name="delete" value="Potwierdź">
-        <a href="categories.php" class="btn btn-danger">Anuluj</a>
-    </form>
-</main>
-<?php include APP_ROOT . "/public/includes/admin-footer.php"; ?>
+echo $twig->render('admin/delete-category.html.twig', $data);

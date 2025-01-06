@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}Usuwanie kategorii {{ category.name }}{% endblock %}
+{% block content %}
+    <main class="container admin" id="content">
+        <form class="narrow" action="delete-category.php?id={{ category.id }}" method="POST">
+            <h1>Usuń kategorię</h1>
+            <p>Kliknij <em>Potwierdź</em>, aby usunąć kategorię: <em>{{ category.name ?? 'Nazwa kategorii' }}</em></p>
+            <input class="btn btn-primary" type="submit" name="delete" value="Potwierdź">
+            <a href="categories.php" class="btn btn-danger">Anuluj</a>
+        </form>
+    </main>
+{% endblock %}

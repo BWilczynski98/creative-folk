@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}Usuwanie publikacji {{ publication.title }}{% endblock %}
+{% block content %}
+    <main class="container admin" id="content">
+        <form class="narrow" action="delete-publication.php?id={{ publication.id }}" method="POST">
+            <h1>Usuń publikacje</h1>
+            <p>Kliknij <em>Potwierdź</em>, aby usunąć publikacje: <em>{{ publication.title ?? 'Nazwa publikacji' }}</em></p>
+            <input type="submit" class="btn btn-primary" value="Potwierdź" name="delete">
+            <a href="publications.php" class="btn btn-danger">Anuluj</a>
+        </form>
+    </main>
+{% endblock %}

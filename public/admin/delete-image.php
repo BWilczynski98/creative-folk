@@ -25,19 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-?>
+$data = [
+        'id'            =>  $id,
+        'publication'   =>  $publication,
+];
 
-<?php include APP_ROOT . "/public/includes/admin-header.php" ?>
-<main class="container admin" id="content">
-    <form action="delete-image.php?id=<?= $id ?>" method="POST" class="narrow">
-        <h1>Usuń obraz</h1>
-        <p><img
-                src="../sent/<?= parse_to_html($publication['image_file']) ?>"
-                al="<?= parse_to_html($publication['image_alt_text']) ?>"
-            >
-        </p>
-        <p>Kliknij <em>Potwierdź</em>, aby usunąć obraz:</p>
-        <input type="submit" class="btn btn-primary" name="delete" value="Potwierdź">
-        <a href="publication.php?id=<?= $id ?>" class="btn btn-danger">Anuluj</a>
-    </form>
-</main>
+echo $twig->render('admin/delete-image.html.twig', $data);

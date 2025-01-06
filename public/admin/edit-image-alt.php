@@ -25,25 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
 }
 
-?>
+$data = [
+    'id'            =>  $id,
+    'publication'   =>  $publication,
+];
 
-<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
-<main class="container admin" id="content">
-    <form action="edit-image-alt.php?id=<?= $id ?>" method="POST" class="narrow">
-        <h1>Zmień tekst zastępczy dla tego zdjęcia</h1>
-        <p>
-            <img src="../sent/<?= $publication['image_file'] ?> ">
-        </p>
-        <label for="image_alt_text">Tekst zastępczy:</label>
-        <input
-            id="image_alt_text"
-            name="image_alt_text"
-            type="text"
-            class="form-control"
-            value="<?= $publication['image_alt_text'] ?>"
-        ><br>
-        <input type="submit" value="Aktualizuj" class="btn btn-primary" name="update">
-        <a href="publication.php?id=<?= $id ?>" class="btn btn-danger">Anuluj</a>
-    </form>
-</main>
-<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>
+echo $twig->render('admin/edit-image-alt.html.twig', $data);

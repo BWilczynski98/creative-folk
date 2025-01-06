@@ -1,0 +1,22 @@
+{% extends 'admin/layout.html.twig' %}
+{% block title %}Edytowanie tekstu alt zdjęcia{% endblock %}
+{% block content %}
+    <main class="container admin" id="content">
+        <form action="edit-image-alt.php?id={{ id }}" method="POST" class="narrow">
+            <h1>Zmień tekst zastępczy dla tego zdjęcia</h1>
+            <p>
+                <img src="../sent/{{ publication.image_file }}">
+            </p>
+            <label for="image_alt_text">Tekst zastępczy:</label>
+            <input
+                    id="image_alt_text"
+                    name="image_alt_text"
+                    type="text"
+                    class="form-control"
+                    value="{{ publication.image_alt_text }}"
+            ><br>
+            <input type="submit" value="Aktualizuj" class="btn btn-primary" name="update">
+            <a href="publication.php?id={{ id }}" class="btn btn-danger">Anuluj</a>
+        </form>
+    </main>
+{% endblock %}
