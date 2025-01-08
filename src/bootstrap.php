@@ -2,8 +2,12 @@
 
 define("APP_ROOT", dirname(__FILE__, 2)); // Ścieżka do katalogu projektu w moim przypadku: C:\xampp\htdocs\creative-folk
 require APP_ROOT . '/src/functions.php';
-require APP_ROOT . '/config/config.php';
 require APP_ROOT . "/vendor/autoload.php"; // Zastępuje funkcje spl_autoload_register
+
+$dotenv = \Dotenv\Dotenv::createImmutable(APP_ROOT . '/src');
+$dotenv->load();
+
+require APP_ROOT . '/config/config.php';
 
 if (DEV === false) {
     set_exception_handler('exception_handler');      // Obsługa wyjątków
