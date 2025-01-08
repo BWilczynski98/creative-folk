@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Rejestracja{% endblock %}
+{% block description %}Rejestracja w serwisie Creative Folk{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>Rejestracja</h1>
+        </section>
+        <form method="POST" action="registration.php" class="form-membership">
+            {% if errors|filter(e => e)|length > 0 %}<div class="alert alert-danger">Proszę poprawić błędy</div>{% endif %}
+
+            <div class="form-group">
+                <label for="first_name">Imię: </label><input type="text" name="first_name" value="{{ user.first_name }}" id="first_name" class="form-control" required>
+                <div class="errors">{{ errors.first_name }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Nazwisko: </label><input type="text" name="last_name" value="{{ user.last_name }}" id="last_name" class="form-control" required>
+                <div class="errors">{{ errors.last_name }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Adres e-mail: </label><input type="email" name="email" value="{{ user.email }}" id="email" class="form-control" required>
+                <div class="errors">{{ errors.email }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Hasło: </label><input type="password" name="password" id="password" class="form-control" required>
+                <div class="errors">{{ errors.password|raw }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Potwierdź haslo: </label><input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
+                <div class="errors">{{ errors.confirm_password}}</div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Rejestracja">
+        </form>
+
+    </main>
+{% endblock %}
