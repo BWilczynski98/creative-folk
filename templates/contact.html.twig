@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Napisz do nas{% endblock %}
+{% block content %}
+    <main class="container" id="form-content">
+        <section class="header"><h1>Napisz do nas</h1></section>
+        <form method="post" action="contact.php" class="form-contact">
+            {% if errors.warnings %}<div class="alert alert-danger">{{ errors.warnings }}</div>{% endif %}
+            {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+            <div class="form-group">
+                <label for="email">E-mail: </label>
+                <input type="text" name="email" id="email" value="{{ from }}" class="form-control">
+                <span class="errors">{{ errors.email }}</span><br>
+            </div>
+            <div class="form-group">
+                <label for="message">Wiadomość: </label><br>
+                <textarea id="message" name="message" class="form-control">{{ message }}</textarea>
+                <span class="errors">{{ errors.message }}</span><br>
+            </div>
+            <input type="submit" value="Wyślij wiadomość" class="btn">
+        </form>
+    </main>
+{% endblock %}
