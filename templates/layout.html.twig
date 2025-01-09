@@ -15,8 +15,22 @@
 </head>
 <body>
 <header>
+    <a class="skip-link" href="#content">Przejdź do treści</a>
+    <nav class="member-menu">
+        <div class="container">
+            {% if session.id == 0 %}
+                <a href="login.php" class="nav-item nav-link">Logowanie</a> /
+                <a href="registration.php" class="nav-item nav-link">Rejestracja</a>
+            {% else %}
+                <a href="user.php?id={{ session.id }}">Profil</a> /
+                {% if session.role == 'admin' %}
+                    <a href="admin/index.php">Admin</a> /
+                {% endif %}
+                <a href="logout.php">Wyloguj się</a>
+            {% endif %}
+        </div>
+    </nav>
     <div class="container">
-        <a class="skip-link" href="#content">Przejdź do treści</a>
         <div class="logo">
             <a href="{{ document_root }}index.php"><img src="{{ document_root }}img/logo.png" alt="Creative Folk"></a>
         </div>

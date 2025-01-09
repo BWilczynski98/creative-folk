@@ -13,9 +13,17 @@
                 />
             {% else %}
                 <img
-                        src="{{ document_root }}sent/uczestnik.png"
+                        src="{{ document_root }}sent/user.png"
                         alt="Zdjęcie domyslne"
                 />
+            {% endif %}
+            {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+            {% if session.id == user.id %}
+                <nav class="member-options">
+                    <a href="new-publication.php" class="btn btn-primary">Dodaj pracę</a>
+                    <a href="edit-user-profile.php" class="btn btn-primary">Edytuj profil</a>
+                    <a href="edit-profile-image.php" class="btn btn-primary">Zdjęcie profilowe</a>
+                </nav>
             {% endif %}
         </section>
         <section class="grid">
