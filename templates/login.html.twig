@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Logowanie{% endblock %}
+{% block description %}Zaloguj się na konto w Creative Folk{% endblock %}
+{% block content %}
+    <main class="container" id="content">
+
+        <section class="header">
+            <h1>Zaloguj się</h1>
+        </section>
+        <form method="post" action="login.php" class="form-membership">
+            {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+            {% if errors %}<div class="alert alert-danger">{{ errors.warning }}</div>{% endif %}
+
+            <div class="form-group">
+                <label for="email">E-mail </label>
+                <input type="text" name="email" id="email" value="{{ email }}" class="form-control">
+                <div class="errors">{{ errors.email }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Hasło </label>
+                <input type="password" name="password" id="password" class="form-control">
+                <div class="errors">{{ errors.password|raw }}</div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Zaloguj"><br>
+            <p><a href="reset-password.php">Zapomniałeś hasło?</a></p>
+        </form>
+
+    </main>
+{% endblock %}
