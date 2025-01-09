@@ -25,6 +25,13 @@ $loader = new Twig\Loader\FilesystemLoader(APP_ROOT . '/templates');
 $twig = new Twig\Environment($loader, $twig_options);
 $twig->addGlobal('document_root', DOCUMENT_ROOT);
 
+$session = [
+    'id'    =>  $cms->session()->getId(),
+    'name'  =>  $cms->session()->getName(),
+    'role'  =>  $cms->session()->getRole(),
+];
+$twig->addGlobal('session', $session);
+
 if (DEV === true) {
     $twig->addExtension(new \Twig\Extension\DebugExtension());
 }
