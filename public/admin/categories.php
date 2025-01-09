@@ -2,6 +2,8 @@
 declare(strict_types=1);
 include "../../src/bootstrap.php";
 
+is_admin($session['role']);
+
 $success = filter_input(INPUT_GET, 'success');
 $error = filter_input(INPUT_GET, 'error');
 

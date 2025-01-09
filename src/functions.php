@@ -62,3 +62,11 @@ function redirect(string $url, ?array $params = [], ?int $response_code = 302)
     header('location: ' . $location, null, $response_code);
     exit();
 }
+
+function is_admin(string $role)
+{
+    if ($role !== 'admin') {
+        header('Location: ' . DOCUMENT_ROOT);
+        exit();
+    }
+}

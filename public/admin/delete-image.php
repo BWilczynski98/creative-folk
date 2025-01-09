@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 include "../../src/bootstrap.php";
+
+is_admin($session['role']);
+
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $publication = [];
 
