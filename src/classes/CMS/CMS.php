@@ -9,6 +9,7 @@ class CMS
     protected ?Categories $category = null;
     protected ?Publications $publications = null;
     protected ?Session $session = null;
+    protected ?Tokens $tokens = null;
 
     public function __construct(string $dsn, ?string $username = null, ?string $password = null)
     {
@@ -45,5 +46,13 @@ class CMS
             $this->session = new Session();
         }
         return $this->session;
+    }
+
+    public function tokens(): Tokens
+    {
+        if ($this->tokens === null) {
+            $this->tokens = new Tokens($this->db);
+        }
+        return $this->tokens;
     }
 }
