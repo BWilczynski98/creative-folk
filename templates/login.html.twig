@@ -9,7 +9,7 @@
         </section>
         <form method="post" action="login.php" class="form-membership">
             {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
-            {% if errors %}<div class="alert alert-danger">{{ errors.warning }}</div>{% endif %}
+            {% if errors.warning %}<div class="alert alert-danger">{{ errors.warning }}</div>{% endif %}
 
             <div class="form-group">
                 <label for="email">E-mail </label>

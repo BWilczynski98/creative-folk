@@ -5,6 +5,7 @@ include "../src/bootstrap.php";
 use PhpMysql\Validation\Validator;
 
 $success = filter_input(INPUT_GET, 'success') ?? null;
+$errors['warning'] = filter_input(INPUT_GET, 'error');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -34,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $data = [
-    'errors' => [],
+    'errors' => $errors,
     'success' => $success,
     'navigation' => $cms->categories()->getAll(),
 ];
