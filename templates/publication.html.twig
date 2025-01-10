@@ -10,7 +10,7 @@
         <section class="text">
             <h1>{{ publication.title }}</h1>
             <div class="date">{{ publication.created_at|date('d F Y') }}</div>
-            <div class="content">{{ publication.content }}</div>
+            <div class="content">{{ publication.content|raw }}</div>
             {{ include('publication-category-and-author-credits.html.twig') }}
         </section>
     </main>
