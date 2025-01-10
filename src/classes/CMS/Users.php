@@ -22,6 +22,7 @@ class Users
         $sql = "SELECT first_name, last_name, id FROM users";
         return $this->db->executeSQL($sql)->fetchAll();
     }
+
     public function create(array $data): bool
     {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -37,7 +38,6 @@ class Users
             }
             throw $e;
         }
-
     }
 
     public function login(string $email, string $password): mixed
@@ -52,7 +52,26 @@ class Users
         }
 
         $password_check = password_verify($password, $user['password']);
-
         return $password_check ? $user : false;
+    }
+
+    public function getUserIdByEmail(string $email): ?int
+    {
+        $sql = "SELECT id FROM users WHERE email = :email;";
+        return $this->db->executeSQL($sql, [$email])->fetchColumn();
+    }
+
+    public function updatePassword(int $id, string $new_password): bool
+    {
+        $hash = password_hash($new_password, PASSWORD_DEFAULT);
+
+        $args = [
+            'id' => $id,
+            'password' => $hash
+        ];
+
+        $sql = "UPDATE users SET password = :password WHERE id = :id;";
+        $this->db->executeSQL($sql, $args);
+        return true;
     }
 }
