@@ -1,5 +1,6 @@
 <?php
 define('DEV', true);
+define('DOMAIN_NAME', 'http://localhost/creative-folk/public/');
 
 $directory_path = substr(__DIR__, strlen($_SERVER['DOCUMENT_ROOT']));
 $parent_directory_path = dirname($directory_path);
